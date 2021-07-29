@@ -65,7 +65,7 @@ describe('demo CRUD routes', () => {
     });
 
     const res = await request(app)
-      .put('/api/v1/villagers')
+      .put(`/api/v1/villagers/${villager.id}`)
       .send({
         catchphrase: 'munge king'
       });
