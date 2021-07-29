@@ -10,19 +10,19 @@ describe('demo CRUD routes', () => {
 
   it('tests create villager route', async () => {
     const villager = { 
-      id: 356,
+      vid: 356,
       name: 'Peanut',
       personality: 'Peppy',
       species: 'Squirrel',
-      gender: 'Feale',
+      gender: 'Female',
       catchphrase: 'slacker'
 
     };
     const res = await request(app)
-      .post(`/api/v1/villagers/${villager.id}`)
-      .send(villager);
+      .post('/api/v1/villagers')
+      .send({ vid: 356 });
 
-    expect(res.body).toEqual(villager);
+    expect(res.body).toEqual({ ...villager, id:'1' });
   });
 });
 
