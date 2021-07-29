@@ -8,13 +8,21 @@ describe('demo CRUD routes', () => {
     return setup(pool);
   });
 
-  it('tests create route', async () => {
-    const thing = { body: thing };
-    const res = await request(app)
-      .post('/api/v1/thing')
-      .send(thing);
+  it('tests create villager route', async () => {
+    const villager = { 
+      id: 356,
+      name: 'Peanut',
+      personality: 'Peppy',
+      species: 'Squirrel',
+      gender: 'Feale',
+      catchphrase: 'slacker'
 
-    expect(res.body).toEqual(thing);
+    };
+    const res = await request(app)
+      .post(`/api/v1/villagers/${villager.id}`)
+      .send(villager);
+
+    expect(res.body).toEqual(villager);
   });
 });
 
