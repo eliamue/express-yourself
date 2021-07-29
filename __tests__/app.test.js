@@ -54,5 +54,22 @@ describe('demo CRUD routes', () => {
     expect(res.body).toEqual([villager1, villager2, villager3, villager4]);
   });
 
+  it('updates a specific villager', async () => {
+    const villager = await VillagersService.generateVillager({
+      vid: 194,
+      name: 'Soleil',
+      personality: 'Snooty',
+      species: 'Hamster',
+      gender: 'Female',
+      catchphrase: 'tarnation'
+    });
+
+    const res = await request(app)
+      .put('/api/v1/villagers')
+      .send({
+        catchphrase: 'munge king'
+      });
+    expect(res.body).toEqual({ ...villager, catchphrase: 'munge king' });
+  });
 });
 
