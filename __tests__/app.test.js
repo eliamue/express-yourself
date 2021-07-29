@@ -42,5 +42,15 @@ describe('demo CRUD routes', () => {
     expect(res.body).toEqual({ ...marshal, id: '1' });
   });
 
+  it('tests getting all villagers', async () => {
+    const villager1 = await VillagersService.generateVillager({ vid: 163 });
+    const villager2 = await VillagersService.generateVillager({ vid: 273 });
+
+    const res = await request(app)
+      .get('/api/v1/villagers');
+
+    expect(res.body).toEqual([villager1, villager2]);
+  });
+
 });
 
