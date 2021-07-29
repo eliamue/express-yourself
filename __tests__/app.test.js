@@ -45,11 +45,13 @@ describe('demo CRUD routes', () => {
   it('tests getting all villagers', async () => {
     const villager1 = await VillagersService.generateVillager({ vid: 163 });
     const villager2 = await VillagersService.generateVillager({ vid: 273 });
+    const villager3 = await VillagersService.generateVillager({ vid: 3 });
+    const villager4 = await VillagersService.generateVillager({ vid: 28 });
 
     const res = await request(app)
       .get('/api/v1/villagers');
 
-    expect(res.body).toEqual([villager1, villager2]);
+    expect(res.body).toEqual([villager1, villager2, villager3, villager4]);
   });
 
 });
