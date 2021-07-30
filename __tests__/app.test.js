@@ -71,5 +71,22 @@ describe('demo CRUD routes', () => {
       });
     expect(res.body).toEqual({ ...villager, catchphrase: 'munge king' });
   });
+
+  it('deletes a specific villager', async () => {
+    const villager = await VillagersService.generateVillager({
+      vid: 248,
+      name: 'Elise',
+      personality: 'Snooty',
+      species: 'Monkey',
+      gender: 'Female',
+      catchphrase: 'puh-lease'
+    });
+    const res = await request(app)
+      .delete(`/api/v1/villagers/${villager.id}`);
+
+    expect(res.body).toEqual({
+      messgae: `You have deleted that horrible imposter, ${villager.name} the ${villager.species}. Thank goodness. THERE CAN ONLY BE ONE. `
+    });
+  });
 });
 
