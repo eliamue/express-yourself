@@ -85,7 +85,7 @@ describe('demo CRUD routes', () => {
       .delete(`/api/v1/villagers/${villager.id}`);
 
     expect(res.body).toEqual({
-      messgae: `You have deleted that horrible imposter, ${villager.name} the ${villager.species}. Thank goodness. THERE CAN ONLY BE ONE. `
+      messgae: `You have deleted that horrible imposter, ${villager.name} the ${villager.species}. Thank goodness. THERE CAN ONLY BE ONE.`
     });
   });
 });
