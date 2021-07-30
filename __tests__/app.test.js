@@ -3,7 +3,6 @@ import setup from '../data/setup.js';
 import request from 'supertest';
 import app from '../lib/app.js';
 import VillagersService from '../lib/services/VillagersService.js';
-// import Villagers from '../lib/models/Villagers.js';
 
 describe('demo CRUD routes', () => {
   beforeEach(() => {
@@ -54,7 +53,7 @@ describe('demo CRUD routes', () => {
     expect(res.body).toEqual([villager1, villager2, villager3, villager4]);
   });
 
-  it('updates a specific villager', async () => {
+  it('tests making updates a specific villager', async () => {
     const villager = await VillagersService.generateVillager({
       vid: 194,
       name: 'Soleil',
@@ -70,6 +69,23 @@ describe('demo CRUD routes', () => {
         catchphrase: 'munge king'
       });
     expect(res.body).toEqual({ ...villager, catchphrase: 'munge king' });
+  });
+
+  it('tests delete route for removing a specific villager', async () => {
+    const villager = await VillagersService.generateVillager({
+      vid: 248,
+      name: 'Elise',
+      personality: 'Snooty',
+      species: 'Monkey',
+      gender: 'Female',
+      catchphrase: 'puh-lease'
+    });
+    const res = await request(app)
+      .delete(`/api/v1/villagers/${villager.id}`);
+
+    expect(res.body).toEqual({
+      message: `You have deleted that horrible imposter, ${villager.name} the ${villager.species}. Thank goodness. THERE CAN ONLY BE ONE.`
+    });
   });
 });
 
